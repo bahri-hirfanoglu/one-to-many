@@ -5,6 +5,7 @@ import (
 	"net"
 	"os"
 
+	"github.com/bahri-hirfanoglu/go-socketio/command"
 	"github.com/bahri-hirfanoglu/go-socketio/helper"
 )
 
@@ -35,7 +36,8 @@ func processClient(connection net.Conn) {
 	if err != nil {
 		fmt.Println("Error reading:", err.Error())
 	}
-	fmt.Println("Received: ", string(buffer[:mLen]))
-	_, _ = connection.Write([]byte("Thanks! Got your message:" + string(buffer[:mLen])))
+	var message = string(buffer[:mLen])
+	var result = command.RunCommand(message)
+	_, _ = connection.Write([]byte(result))
 	connection.Close()
 }
