@@ -22,3 +22,22 @@ func LoadServerData() model.ServerList {
 	_ = json.Unmarshal([]byte(file), &data)
 	return data
 }
+
+func GetServer(arr model.ServerList, val string) (out model.Server) {
+	for _, each := range arr.ServerList {
+		if each.Id == val {
+			out = each
+			break
+		}
+	}
+	return out
+}
+
+func GetOtherServer(arr model.ServerList, val string) (out []model.Server) {
+	for _, each := range arr.ServerList {
+		if each.Id != val {
+			out = append(out, each)
+		}
+	}
+	return out
+}

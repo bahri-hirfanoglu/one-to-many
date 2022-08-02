@@ -3,16 +3,27 @@ package command
 import (
 	"encoding/json"
 	"fmt"
+
+	"github.com/bahri-hirfanoglu/go-socketio/client"
+	"github.com/bahri-hirfanoglu/go-socketio/helper"
 )
 
-func RunCommand(data string) string {
-	//var serverlist = helper.LoadServerData()
+func RunCommand(data string) (result string) {
+	fmt.Println(data)
+	result = "unknown command"
+	servers := helper.LoadServerData()
 	commands := parseCommand(data)
-	switch commands["name"] {
+	switch commands["CommandName"] {
 	case "sendMessage":
-		fmt.Println("getMessage")
+		otherServers := helper.GetOtherServer(servers, "s1")
+		for _, item := range otherServers {
+			cmdJson, _ := json.Marshal(commands)
+			fmt.Println(item.Ip, item.Port, string(cmdJson))
+			go client.SendClient(item.Ip, item.Port, string(cmdJson))
+		}
+		result = "command: " + commands["name"]
 	}
-	return ""
+	return result
 }
 
 func parseCommand(val string) map[string]string {
