@@ -9,16 +9,15 @@ import (
 )
 
 func RunCommand(data string) (result string) {
-	fmt.Println(data)
 	result = "unknown command"
 	servers := helper.LoadServerData()
 	commands := parseCommand(data)
 	switch commands["CommandName"] {
 	case "sendMessage":
-		otherServers := helper.GetOtherServer(servers, "s1")
+		otherServers := helper.GetOtherServer(servers, commands["Server"])
 		for _, item := range otherServers {
 			cmdJson, _ := json.Marshal(commands)
-			fmt.Println(item.Ip, item.Port, string(cmdJson))
+			fmt.Println("Server: " + item.Id + ": " + item.Ip + ":" + item.Port + " send package: " + commands["CommandName"])
 			go client.SendClient(item.Ip, item.Port, string(cmdJson))
 		}
 		result = "command: " + commands["name"]

@@ -25,7 +25,6 @@ func CreateServer() {
 			fmt.Println("Error accepting: ", err.Error())
 			os.Exit(1)
 		}
-		fmt.Println("client connected")
 		go processClient(connection)
 	}
 }
