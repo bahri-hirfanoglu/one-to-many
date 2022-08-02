@@ -10,13 +10,13 @@ import (
 )
 
 func CreateServer() {
-	server, err := net.Listen(helper.Getenv("SERVER_TYPE", "tcp"), helper.Getenv("SERVER_HOST", "localhost")+":"+helper.Getenv("SERVER_PORT", "5555"))
+	server, err := net.Listen(helper.Getenv("SERVER_TYPE", "tcp"), helper.Getenv("SERVER_HOST", "127.0.0.1")+":"+helper.Getenv("SERVER_PORT", "5555"))
 	if err != nil {
 		fmt.Println("Error listening:", err.Error())
 		os.Exit(1)
 	}
 	defer server.Close()
-	fmt.Println("Listening on " + helper.Getenv("SERVER_HOST", "localhost") + ":" + helper.Getenv("SERVER_PORT", "5555"))
+	fmt.Println("Listening on " + helper.Getenv("SERVER_HOST", "127.0.0.1") + ":" + helper.Getenv("SERVER_PORT", "5555"))
 	fmt.Println("Waiting for client...")
 
 	for {
