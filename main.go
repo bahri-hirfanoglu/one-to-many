@@ -1,10 +1,10 @@
 package main
 
 import (
-	"fmt"
 	"log"
 
 	"github.com/bahri-hirfanoglu/go-socketio/server"
+	"github.com/fatih/color"
 	"github.com/joho/godotenv"
 )
 
@@ -13,7 +13,7 @@ func main() {
 	if err != nil {
 		log.Fatal("Error loading .env file")
 	}
-	fmt.Println("Server Running...")
+	color.Cyan("Server is running...")
 	server.CreateServer()
 
 }
