@@ -6,7 +6,7 @@ It is an example of the subject object layer that enables communication between 
 
 ## Test Client
 
-You can create duck objects using the simple [client](https://github.com/bahri-hirfanoglu/one-to-many/tree/c%23-test-client/test-client) prepared in C#.
+You can use the test client(https://github.com/bahri-hirfanoglu/one-to-many/tree/c%23-test-client/test-client) to create simple observer clients.
 
 ## Contributing
 
