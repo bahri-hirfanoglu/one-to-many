@@ -12,6 +12,7 @@ func RunCommand(data string) (result string) {
 	result = "unknown command"
 	servers := helper.LoadServerData()
 	commands := parseCommand(data)
+	commands["socketKey"] = helper.Getenv("SOCKET_KEY", "_")
 	switch commands["CommandName"] {
 	case "sendMessage":
 		otherServers := helper.GetOtherServer(servers, commands["Server"])
